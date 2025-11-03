@@ -14,6 +14,6 @@ Mental Health Companion berbasis penelitian ilmiah untuk mengelola anxiety & kes
 3. Install & nikmati!
 
 ### 🔗 Landing Page
-https://github.com/zakycodes/zaky_codes_mental_health/
 ---
+https://zakycodes.github.io/zaky_codes_mental_health/
 **Minimum Requirements:** Android 5.0 (Lollipop) or higher
