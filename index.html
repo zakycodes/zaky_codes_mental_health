@@ -1,1250 +1,1500 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZCMH - Mental Health Companion | Zaky Codes</title>
-    <meta name="description" content="Aplikasi kesehatan mental berbasis riset ilmiah. Kurangi anxiety dengan gratitude journal, binaural beats, dan meal reminder.">
+    <meta
+      name="description"
+      content="Aplikasi kesehatan mental berbasis riset ilmiah. Kurangi anxiety dengan gratitude journal, binaural beats, dan meal reminder."
+    />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ZCMH - Mental Health Companion" />
+    <meta
+      property="og:description"
+      content="Aplikasi kesehatan mental berbasis riset ilmiah. Kurangi anxiety dengan gratitude journal, binaural beats, dan meal reminder."
+    />
+    <meta property="og:image" content="./logo.png" />
+    <meta property="og:url" content="https://zakycodes.github.io/ZCMH" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZCMH - Mental Health Companion" />
+    <meta
+      name="twitter:description"
+      content="Aplikasi kesehatan mental berbasis riset ilmiah."
+    />
+    <meta name="twitter:image" content="./logo.png" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --mint-green: #10B981;
-            --soft-blue: #3B82F6;
-            --dark-text: #1E293B;
-            --light-gray: #F8F9FA;
-            --medium-gray: #64748B;
-            --white: #FFFFFF;
-            --gradient-1: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
-            --gradient-2: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
-        }
+      :root {
+        --mint-green: #10b981;
+        --soft-blue: #3b82f6;
+        --dark-text: #1e293b;
+        --light-gray: #f8f9fa;
+        --medium-gray: #64748b;
+        --white: #ffffff;
+        --gradient-1: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        --gradient-2: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-text);
-            background: var(--light-gray);
-            overflow-x: hidden;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: var(--dark-text);
+        background: var(--light-gray);
+        overflow-x: hidden;
+      }
 
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
+      /* Navbar */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+      }
 
-        nav.scrolled {
-            padding: 0.75rem 5%;
-            box-shadow: var(--shadow-md);
-        }
+      nav.scrolled {
+        padding: 0.75rem 5%;
+        box-shadow: var(--shadow-md);
+      }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
 
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark-text);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-1);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .download-btn {
+        background: var(--gradient-1);
+        color: white !important;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .download-btn::after {
+        display: none;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 5% 4rem;
+        background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.1) 0%,
+          transparent 70%
+        );
+        top: -250px;
+        right: -250px;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.1) 0%,
+          transparent 70%
+        );
+        bottom: -200px;
+        left: -200px;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1400px;
+        width: 100%;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: slideInLeft 0.8s ease-out;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .hero-text .tagline {
+        font-size: 1.5rem;
+        color: var(--medium-gray);
+        margin-bottom: 2rem;
+        animation: slideInLeft 0.8s ease-out 0.2s both;
+      }
+
+      .hero-text p {
+        font-size: 1.1rem;
+        color: var(--medium-gray);
+        margin-bottom: 2.5rem;
+        line-height: 1.8;
+        animation: slideInLeft 0.8s ease-out 0.4s both;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        animation: slideInLeft 0.8s ease-out 0.6s both;
+      }
+
+      .btn-primary {
+        background: var(--gradient-1);
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--soft-blue);
+        padding: 1rem 2.5rem;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+        animation: slideInLeft 0.8s ease-out 0.8s both;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: var(--medium-gray);
+        margin-top: 0.25rem;
+      }
+
+      .hero-visual {
+        position: relative;
+        animation: slideInRight 0.8s ease-out 0.4s both;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .phone-mockup {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        animation: floatPhone 3s ease-in-out infinite;
+      }
+
+      @keyframes floatPhone {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .phone-frame {
+        background: white;
+        border-radius: 40px;
+        padding: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .phone-screen {
+        background: var(--gradient-1);
+        border-radius: 32px;
+        aspect-ratio: 9/19.5;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .phone-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 32px;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 6rem 5%;
+        background: white;
+      }
+
+      .section-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 4rem;
+      }
+
+      .section-header h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-header p {
+        font-size: 1.1rem;
+        color: var(--medium-gray);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--mint-green);
+      }
+
+      .feature-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: var(--gradient-1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .feature-card:nth-child(1) .feature-icon {
+        animation-delay: 0s;
+      }
+      .feature-card:nth-child(2) .feature-icon {
+        animation-delay: 0.2s;
+      }
+      .feature-card:nth-child(3) .feature-icon {
+        animation-delay: 0.4s;
+      }
+      .feature-card:nth-child(4) .feature-icon {
+        animation-delay: 0.6s;
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark-text);
+      }
+
+      .feature-card p {
+        color: var(--medium-gray);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .research-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--soft-blue);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+      }
+
+      /* Screenshots Section */
+      .screenshots {
+        padding: 6rem 5%;
+        background: var(--light-gray);
+      }
+
+      .screenshot-carousel {
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+
+      .screenshot-track {
+        display: flex;
+        gap: 2rem;
+        padding: 2rem 4rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--mint-green) var(--light-gray);
+      }
+
+      .screenshot-track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .screenshot-track::-webkit-scrollbar-track {
+        background: var(--light-gray);
+        border-radius: 10px;
+      }
+
+      .screenshot-track::-webkit-scrollbar-thumb {
+        background: var(--mint-green);
+        border-radius: 10px;
+      }
+
+      .screenshot-track::-webkit-scrollbar-thumb:hover {
+        background: var(--soft-blue);
+      }
+
+      .screenshot-item {
+        flex: 0 0 auto;
+        width: 300px;
+        scroll-snap-align: center;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .screenshot-item:hover {
+        transform: translateY(-8px);
+      }
+
+      .screenshot-frame {
+        background: white;
+        padding: 12px;
+        border-radius: 32px;
+        box-shadow: var(--shadow-md);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .screenshot-item:hover .screenshot-frame {
+        box-shadow: var(--shadow-lg);
+      }
+
+      .screenshot-image {
+        width: 100%;
+        aspect-ratio: 719/1375;
+        background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .screenshot-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 24px;
+      }
+
+      /* How to Install */
+      .install-guide {
+        padding: 6rem 5%;
+        background: white;
+      }
+
+      .install-steps {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .step {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        align-items: flex-start;
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-1);
+        color: white;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .step-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: var(--dark-text);
+      }
+
+      .step-content p {
+        color: var(--medium-gray);
+        line-height: 1.8;
+      }
+
+      .warning-box {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-top: 2rem;
+      }
+
+      .warning-box h4 {
+        color: #92400e;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .warning-box p {
+        color: #78350f;
+      }
+
+      /* FAQ Section */
+      .faq {
+        padding: 6rem 5%;
+        background: var(--light-gray);
+      }
+
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: var(--dark-text);
+        transition: background 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background: var(--light-gray);
+      }
+
+      .faq-icon {
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+
+      .faq-answer-content {
+        padding: 0 1.5rem 1.5rem;
+        color: var(--medium-gray);
+        line-height: 1.8;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark-text);
+        color: white;
+        padding: 4rem 5% 2rem;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-section p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.75rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section a:hover {
+        color: var(--mint-green);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: white;
+      }
+
+      .social-link:hover {
+        background: var(--mint-green);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Responsive */
+      @media (max-width: 968px) {
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-text);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .download-btn {
-            background: var(--gradient-1);
-            color: white !important;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .download-btn::after {
-            display: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 5% 4rem;
-            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            top: -250px;
-            right: -250px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-            bottom: -200px;
-            left: -200px;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+          display: none;
         }
 
         .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1400px;
-            width: 100%;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+          grid-template-columns: 1fr;
+          text-align: center;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-text .tagline {
-            font-size: 1.5rem;
-            color: var(--medium-gray);
-            margin-bottom: 2rem;
-            animation: slideInLeft 0.8s ease-out 0.2s both;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--medium-gray);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            animation: slideInLeft 0.8s ease-out 0.4s both;
+          font-size: 2.5rem;
         }
 
         .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            animation: slideInLeft 0.8s ease-out 0.6s both;
-        }
-
-        .btn-primary {
-            background: var(--gradient-1);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--soft-blue);
-            padding: 1rem 2.5rem;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+          justify-content: center;
         }
 
         .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 3rem;
-            animation: slideInLeft 0.8s ease-out 0.8s both;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-            margin-top: 0.25rem;
-        }
-
-        .hero-visual {
-            position: relative;
-            animation: slideInRight 0.8s ease-out 0.4s both;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .phone-mockup {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            animation: floatPhone 3s ease-in-out infinite;
-        }
-
-        @keyframes floatPhone {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .phone-frame {
-            background: white;
-            border-radius: 40px;
-            padding: 1rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .phone-screen {
-            background: var(--gradient-1);
-            border-radius: 32px;
-            aspect-ratio: 9/19.5;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--medium-gray);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--mint-green);
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
-        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) .feature-icon { animation-delay: 0.4s; }
-        .feature-card:nth-child(4) .feature-icon { animation-delay: 0.6s; }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark-text);
-        }
-
-        .feature-card p {
-            color: var(--medium-gray);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .research-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--soft-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        /* Screenshots Section */
-        .screenshots {
-            padding: 6rem 5%;
-            background: var(--light-gray);
-        }
-
-        .screenshot-carousel {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 24px;
-        }
-
-        .screenshot-track {
-            display: flex;
-            gap: 2rem;
-            padding: 2rem 0;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-        }
-
-        .screenshot-track::-webkit-scrollbar {
-            display: none;
-        }
-
-        .screenshot-item {
-            flex: 0 0 auto;
-            width: 280px;
-            scroll-snap-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .screenshot-item:hover {
-            transform: scale(1.05);
-        }
-
-        .screenshot-frame {
-            background: white;
-            padding: 0.75rem;
-            border-radius: 32px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .screenshot-image {
-            width: 100%;
-            aspect-ratio: 9/19.5;
-            background: var(--gradient-2);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            font-weight: 600;
-        }
-
-        /* How to Install */
-        .install-guide {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .install-steps {
-            max-width: 900px;
-            margin: 0 auto;
+          justify-content: center;
         }
 
         .step {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            align-items: flex-start;
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero-text h1 {
+          font-size: 2rem;
         }
 
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
-            color: white;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            flex-shrink: 0;
+        .hero-text .tagline {
+          font-size: 1.25rem;
         }
 
-        .step-content {
-            flex: 1;
+        .section-header h2 {
+          font-size: 2rem;
         }
 
-        .step-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--dark-text);
+        .btn-primary,
+        .btn-secondary {
+          padding: 0.875rem 1.5rem;
+          font-size: 1rem;
         }
-
-        .step-content p {
-            color: var(--medium-gray);
-            line-height: 1.8;
-        }
-
-        .warning-box {
-            background: #FEF3C7;
-            border-left: 4px solid #F59E0B;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 2rem;
-        }
-
-        .warning-box h4 {
-            color: #92400E;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .warning-box p {
-            color: #78350F;
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 6rem 5%;
-            background: var(--light-gray);
-        }
-
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--dark-text);
-            transition: background 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: var(--light-gray);
-        }
-
-        .faq-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-
-        .faq-answer-content {
-            padding: 0 1.5rem 1.5rem;
-            color: var(--medium-gray);
-            line-height: 1.8;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-text);
-            color: white;
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section p {
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--mint-green);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--mint-green);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .step {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-text h1 {
-                font-size: 2rem;
-            }
-
-            .hero-text .tagline {
-                font-size: 1.25rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .btn-primary, .btn-secondary {
-                padding: 0.875rem 1.5rem;
-                font-size: 1rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav id="navbar">
-        <div class="logo">
-            <div class="logo-icon">💚</div>
-            <span>ZCMH</span>
+      <div class="logo">
+        <div class="logo-icon">
+          <img
+            src="./logo.png"
+            alt="ZCMH Logo"
+            style="height: 40px; width: auto; object-fit: contain"
+          />
         </div>
-        <ul class="nav-links">
-            <li><a href="#features">Fitur</a></li>
-            <li><a href="#screenshots">Preview</a></li>
-            <li><a href="#install">Panduan</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#download" class="download-btn">Download App</a></li>
-        </ul>
+        <span>ZCMH</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Fitur</a></li>
+        <li><a href="#screenshots">Preview</a></li>
+        <li><a href="#install">Panduan</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#download" class="download-btn">Download App</a></li>
+      </ul>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Kelola Kesehatan Mental dengan Pendekatan Ilmiah</h1>
-                <p class="tagline">Bantu kurangi anxiety dengan ZCMH</p>
-                <p>Aplikasi mental health companion berbasis penelitian yang membantu Anda mengelola anxiety, stress, dan kesehatan mental melalui gratitude journaling, binaural beats, meal reminder, dan konsultasi profesional.</p>
-                
-                <div class="hero-buttons">
-                    <a href="#download" class="btn-primary">
-                        <span>📱</span>
-                        Download Sekarang
-                    </a>
-                    <a href="#features" class="btn-secondary">
-                        <span>✨</span>
-                        Lihat Fitur
-                    </a>
-                </div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Kelola Kesehatan Mental dengan Pendekatan Ilmiah</h1>
+          <p class="tagline">Bantu kurangi anxiety dengan ZCMH</p>
+          <p>
+            Aplikasi mental health companion berbasis penelitian yang membantu
+            Anda mengelola anxiety, stress, dan kesehatan mental melalui
+            gratitude journaling, binaural beats, meal reminder, dan konsultasi
+            profesional.
+          </p>
 
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">4+</div>
-                        <div class="stat-label">Fitur Utama</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Penelitian</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Gratis</div>
-                    </div>
-                </div>
-            </div>
+          <div class="hero-buttons">
+            <a href="#download" class="btn-primary">
+              <span>📱</span>
+              Download Sekarang
+            </a>
+            <a href="#features" class="btn-secondary">
+              <span>✨</span>
+              Lihat Fitur
+            </a>
+          </div>
 
-            <div class="hero-visual">
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            💚
-                        </div>
-                    </div>
-                </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">4+</div>
+              <div class="stat-label">Fitur Utama</div>
             </div>
+            <div class="stat-item">
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Penelitian</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Gratis</div>
+            </div>
+          </div>
         </div>
+
+        <div class="hero-visual">
+          <div class="phone-mockup">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="./logo.png" alt="ZCMH App Screenshot" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="section-header">
-            <h2>Fitur Berbasis Penelitian</h2>
-            <p>Setiap fitur dirancang berdasarkan studi ilmiah untuk membantu kesehatan mental Anda</p>
+      <div class="section-header">
+        <h2>Fitur Berbasis Penelitian</h2>
+        <p>
+          Setiap fitur dirancang berdasarkan studi ilmiah untuk membantu
+          kesehatan mental Anda
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📖</div>
+          <h3>Gratitude Journal</h3>
+          <p>
+            Tulis dan simpan jurnal rasa syukur harian Anda. Terbukti mengurangi
+            anxiety hingga 7.76% dan depresi 6.89% dalam meta-analisis 64 studi.
+          </p>
+          <span class="research-badge"> <span>📊</span> Research-backed </span>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📖</div>
-                <h3>Gratitude Journal</h3>
-                <p>Tulis dan simpan jurnal rasa syukur harian Anda. Terbukti mengurangi anxiety hingga 7.76% dan depresi 6.89% dalam meta-analisis 64 studi.</p>
-                <span class="research-badge">
-                    <span>📊</span> Research-backed
-                </span>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🎵</div>
-                <h3>Binaural Beats</h3>
-                <p>Musik relaksasi dengan frekuensi khusus (Delta, Theta, Gamma) yang terbukti mengurangi anxiety hingga 26.3% dan meningkatkan fokus.</p>
-                <span class="research-badge">
-                    <span>📊</span> Research-backed
-                </span>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⏰</div>
-                <h3>Meal Reminder</h3>
-                <p>Pengingat makan setiap 4 jam untuk menjaga stabilitas gula darah. Mencegah lonjakan adrenalin yang dapat memicu anxiety dan mood swings.</p>
-                <span class="research-badge">
-                    <span>📊</span> Research-backed
-                </span>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Konsultasi Profesional</h3>
-                <p>Akses mudah ke psikolog dan hypnotherapist bersertifikat melalui WhatsApp. Dapatkan dukungan profesional untuk kesehatan mental Anda.</p>
-                <span class="research-badge">
-                    <span>✅</span> Professional Support
-                </span>
-            </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎵</div>
+          <h3>Binaural Beats</h3>
+          <p>
+            Musik relaksasi dengan frekuensi khusus (Delta, Theta, Gamma) yang
+            terbukti mengurangi anxiety hingga 26.3% dan meningkatkan fokus.
+          </p>
+          <span class="research-badge"> <span>📊</span> Research-backed </span>
         </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⏰</div>
+          <h3>Meal Reminder</h3>
+          <p>
+            Pengingat makan setiap 4 jam untuk menjaga stabilitas gula darah.
+            Mencegah lonjakan adrenalin yang dapat memicu anxiety dan mood
+            swings.
+          </p>
+          <span class="research-badge"> <span>📊</span> Research-backed </span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Konsultasi Profesional</h3>
+          <p>
+            Akses mudah ke psikolog dan hypnotherapist bersertifikat melalui
+            WhatsApp. Dapatkan dukungan profesional untuk kesehatan mental Anda.
+          </p>
+          <span class="research-badge">
+            <span>✅</span> Professional Support
+          </span>
+        </div>
+      </div>
     </section>
 
     <!-- Screenshots Section -->
     <section class="screenshots" id="screenshots">
-        <div class="section-header">
-            <h2>Lihat ZCMH dalam Aksi</h2>
-            <p>Interface modern, simple, dan mudah digunakan</p>
-        </div>
+      <div class="section-header">
+        <h2>Lihat ZCMH dalam Aksi</h2>
+        <p>Interface modern, simple, dan mudah digunakan</p>
+      </div>
 
-        <div class="screenshot-carousel">
-            <div class="screenshot-track">
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            📖<br>Gratitude<br>Journal
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            📝<br>Journal<br>Detail
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            🎵<br>Binaural<br>Beats Music
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            ⏰<br>Meal<br>Reminder
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            💬<br>Konsultasi<br>Profesional
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <div class="screenshot-image">
-                            ℹ️<br>Info<br>Ilmiah
-                        </div>
-                    </div>
-                </div>
+      <div class="screenshot-carousel">
+        <div class="screenshot-track">
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <div class="screenshot-image">
+                <img src="./asset/1.png" alt="Home Screen" />
+              </div>
             </div>
+          </div>
+
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <div class="screenshot-image">
+                <img src="./asset/3.png" alt="Journal Detail" />
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <div class="screenshot-image">
+                <img src="./asset/4.png" alt="Binaural Beats" />
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <div class="screenshot-image">
+                <img src="./asset/5.png" alt="Settings" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Installation Guide -->
     <section class="install-guide" id="install">
-        <div class="section-header">
-            <h2>Cara Download & Install</h2>
-            <p>Ikuti langkah mudah berikut untuk menginstall ZCMH</p>
+      <div class="section-header">
+        <h2>Cara Download & Install</h2>
+        <p>Ikuti langkah mudah berikut untuk menginstall ZCMH</p>
+      </div>
+
+      <div class="install-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Download APK File</h3>
+            <p>
+              Klik tombol download di bagian bawah halaman ini atau kunjungi
+              GitHub Releases kami. File APK akan terdownload ke perangkat
+              Android Anda.
+            </p>
+          </div>
         </div>
 
-        <div class="install-steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Download APK File</h3>
-                    <p>Klik tombol download di bagian bawah halaman ini atau kunjungi GitHub Releases kami. File APK akan terdownload ke perangkat Android Anda.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Aktifkan "Install Unknown Apps"</h3>
-                    <p>Buka <strong>Settings → Security → Install unknown apps</strong>, lalu aktifkan untuk browser atau file manager yang Anda gunakan untuk download.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Install Aplikasi</h3>
-                    <p>Buka file APK yang sudah didownload dari folder Downloads. Tap "Install" dan tunggu proses instalasi selesai.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Buka & Nikmati</h3>
-                    <p>Setelah instalasi selesai, buka aplikasi ZCMH dan mulai perjalanan kesehatan mental Anda. Semua fitur sudah siap digunakan!</p>
-                </div>
-            </div>
-
-            <div class="warning-box">
-                <h4>⚠️ Catatan Penting</h4>
-                <p><strong>Mengapa tidak di Play Store?</strong> Saat ini ZCMH masih dalam tahap awal pengembangan dan akan dipublikasikan dalam jurnal ilmiah Naskah Prima. APK distribution memungkinkan kami untuk memberikan akses gratis tanpa biaya publikasi Play Store.</p>
-                <p style="margin-top: 0.75rem;"><strong>Keamanan:</strong> File APK ini aman dan bebas dari malware. Source code akan tersedia di GitHub untuk transparansi.</p>
-            </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Aktifkan "Install Unknown Apps"</h3>
+            <p>
+              Buka <strong>Settings → Security → Install unknown apps</strong>,
+              lalu aktifkan untuk browser atau file manager yang Anda gunakan
+              untuk download.
+            </p>
+          </div>
         </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Install Aplikasi</h3>
+            <p>
+              Buka file APK yang sudah didownload dari folder Downloads. Tap
+              "Install" dan tunggu proses instalasi selesai.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Buka & Nikmati</h3>
+            <p>
+              Setelah instalasi selesai, buka aplikasi ZCMH dan mulai perjalanan
+              kesehatan mental Anda. Semua fitur sudah siap digunakan!
+            </p>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <h4>⚠️ Catatan Penting</h4>
+          <p>
+            <strong>Mengapa tidak di Play Store?</strong> Saat ini ZCMH masih
+            dalam tahap awal pengembangan dan akan dipublikasikan dalam jurnal
+            ilmiah Naskah Prima. APK distribution memungkinkan kami untuk
+            memberikan akses gratis tanpa biaya publikasi Play Store.
+          </p>
+          <p style="margin-top: 0.75rem">
+            <strong>Keamanan:</strong> File APK ini aman dan bebas dari malware.
+            Source code akan tersedia di GitHub untuk transparansi.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- FAQ Section -->
     <section class="faq" id="faq">
-        <div class="section-header">
-            <h2>Pertanyaan yang Sering Diajukan</h2>
-            <p>Temukan jawaban untuk pertanyaan Anda</p>
+      <div class="section-header">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <p>Temukan jawaban untuk pertanyaan Anda</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah ZCMH benar-benar gratis?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Ya, 100% gratis! Semua fitur (Gratitude Journal, Binaural Beats,
+              Meal Reminder) dapat digunakan tanpa biaya. Untuk konsultasi
+              dengan psikolog/hypnotherapist, biaya disesuaikan dengan layanan
+              profesional yang Anda pilih.
+            </div>
+          </div>
         </div>
 
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Apakah ZCMH benar-benar gratis?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Ya, 100% gratis! Semua fitur (Gratitude Journal, Binaural Beats, Meal Reminder) dapat digunakan tanpa biaya. Untuk konsultasi dengan psikolog/hypnotherapist, biaya disesuaikan dengan layanan profesional yang Anda pilih.
-                    </div>
-                </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Mengapa tidak tersedia di Play Store?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              ZCMH saat ini masih dalam tahap research dan akan dipublikasikan
+              di jurnal ilmiah Naskah Prima. Distribusi melalui APK memungkinkan
+              kami memberikan akses gratis kepada publik tanpa biaya publikasi
+              Play Store ($25). Kami berencana untuk publish ke Play Store
+              setelah publikasi jurnal selesai.
             </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Mengapa tidak tersedia di Play Store?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        ZCMH saat ini masih dalam tahap research dan akan dipublikasikan di jurnal ilmiah Naskah Prima. Distribusi melalui APK memungkinkan kami memberikan akses gratis kepada publik tanpa biaya publikasi Play Store ($25). Kami berencana untuk publish ke Play Store setelah publikasi jurnal selesai.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Apakah APK ini aman untuk diinstall?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Sangat aman! APK di-host di GitHub Releases yang terpercaya. Source code akan tersedia secara public untuk transparansi. ZCMH tidak meminta permission yang mencurigakan dan tidak mengandung malware. Aplikasi hanya meminta izin notifikasi untuk meal reminder dan akses media untuk binaural beats.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Apakah data jurnal saya aman?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Ya! Semua data jurnal disimpan secara lokal di perangkat Anda menggunakan Room Database. ZCMH tidak mengirim data pribadi Anda ke server manapun. Data Anda sepenuhnya privat dan hanya dapat diakses oleh Anda.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Bagaimana cara update aplikasi?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Saat ini, update dilakukan secara manual. Kunjungi halaman ini atau GitHub Releases kami untuk download versi terbaru, lalu install seperti biasa. Kami sedang mengembangkan fitur auto-update checker untuk kemudahan Anda.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Apakah ZCMH bisa menggantikan terapi profesional?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <strong>TIDAK.</strong> ZCMH adalah aplikasi pendukung (adjunct therapy) yang membantu Anda dalam self-care dan kesehatan mental sehari-hari. Jika Anda mengalami kondisi mental health yang serius, sangat disarankan untuk berkonsultasi dengan profesional melalui fitur konsultasi kami atau langsung ke psikolog/psikiater.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Berapa lama saya harus menggunakan ZCMH untuk melihat hasil?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Berdasarkan penelitian, efek gratitude journaling dapat dirasakan dalam 1-2 minggu penggunaan konsisten (2-4x per minggu). Binaural beats memberikan efek relaksasi segera (15-30 menit), sedangkan meal reminder membantu stabilitas mood dalam beberapa hari. Konsistensi adalah kunci!
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Apakah harus menggunakan headphone untuk binaural beats?</span>
-                    <span class="faq-icon">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <strong>YA, WAJIB!</strong> Binaural beats bekerja dengan mengirimkan frekuensi berbeda ke telinga kiri dan kanan. Tanpa headphone stereo, efek binaural tidak akan terjadi dan Anda hanya mendengar musik biasa. Gunakan headphone/earbuds dengan kualitas baik untuk hasil optimal.
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah APK ini aman untuk diinstall?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Sangat aman! APK di-host di GitHub Releases yang terpercaya.
+              Source code akan tersedia secara public untuk transparansi. ZCMH
+              tidak meminta permission yang mencurigakan dan tidak mengandung
+              malware. Aplikasi hanya meminta izin notifikasi untuk meal
+              reminder dan akses media untuk binaural beats.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah data jurnal saya aman?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Ya! Semua data jurnal disimpan secara lokal di perangkat Anda
+              menggunakan Room Database. ZCMH tidak mengirim data pribadi Anda
+              ke server manapun. Data Anda sepenuhnya privat dan hanya dapat
+              diakses oleh Anda.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara update aplikasi?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Saat ini, update dilakukan secara manual. Kunjungi halaman ini
+              atau GitHub Releases kami untuk download versi terbaru, lalu
+              install seperti biasa. Kami sedang mengembangkan fitur auto-update
+              checker untuk kemudahan Anda.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah ZCMH bisa menggantikan terapi profesional?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <strong>TIDAK.</strong> ZCMH adalah aplikasi pendukung (adjunct
+              therapy) yang membantu Anda dalam self-care dan kesehatan mental
+              sehari-hari. Jika Anda mengalami kondisi mental health yang
+              serius, sangat disarankan untuk berkonsultasi dengan profesional
+              melalui fitur konsultasi kami atau langsung ke psikolog/psikiater.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span
+              >Berapa lama saya harus menggunakan ZCMH untuk melihat
+              hasil?</span
+            >
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Berdasarkan penelitian, efek gratitude journaling dapat dirasakan
+              dalam 1-2 minggu penggunaan konsisten (2-4x per minggu). Binaural
+              beats memberikan efek relaksasi segera (15-30 menit), sedangkan
+              meal reminder membantu stabilitas mood dalam beberapa hari.
+              Konsistensi adalah kunci!
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span
+              >Apakah harus menggunakan headphone untuk binaural beats?</span
+            >
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <strong>YA, WAJIB!</strong> Binaural beats bekerja dengan
+              mengirimkan frekuensi berbeda ke telinga kiri dan kanan. Tanpa
+              headphone stereo, efek binaural tidak akan terjadi dan Anda hanya
+              mendengar musik biasa. Gunakan headphone/earbuds dengan kualitas
+              baik untuk hasil optimal.
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Download Section -->
-    <section class="install-guide" id="download" style="background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);">
-        <div class="section-header">
-            <h2>Download ZCMH Sekarang</h2>
-            <p>Mulai perjalanan kesehatan mental Anda hari ini</p>
-        </div>
+    <section
+      class="install-guide"
+      id="download"
+      style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%)"
+    >
+      <div class="section-header">
+        <h2>Download ZCMH Sekarang</h2>
+        <p>Mulai perjalanan kesehatan mental Anda hari ini</p>
+      </div>
 
-        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <div style="background: white; padding: 3rem; border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
-                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">ZCMH v1.0.0</h3>
-                <p style="color: var(--medium-gray); margin-bottom: 2rem; line-height: 1.8;">
-                    Android 5.0 (Lollipop) atau lebih tinggi<br>
-                    Ukuran: ~15 MB
-                </p>
-                
-                <a href="https://github.com/zakycodes/ZCMH/releases/latest/download/zcmh-v1.0.0.apk" 
-                   class="btn-primary" 
-                   style="display: inline-flex; margin-bottom: 1rem;">
-                    <span>📥</span>
-                    Download APK (v1.0.0)
-                </a>
-                
-                <p style="font-size: 0.9rem; color: var(--medium-gray); margin-top: 1.5rem;">
-                    Atau kunjungi <a href="https://github.com/zakycodes/ZCMH/releases" 
-                    style="color: var(--soft-blue); font-weight: 600; text-decoration: none;">GitHub Releases</a>
-                </p>
-            </div>
+      <div style="text-align: center; max-width: 600px; margin: 0 auto">
+        <div
+          style="
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+          "
+        >
+          <div style="margin-bottom: 1.5rem">
+            <img
+              src="./logo.png"
+              alt="ZCMH Logo"
+              style="
+                width: 100%;
+                max-width: 120px;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto;
+              "
+            />
+          </div>
 
-            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 16px; border-left: 4px solid var(--mint-green);">
-                <p style="color: var(--dark-text); font-weight: 600; margin-bottom: 0.5rem;">✨ Segera Hadir di Naskah Prima</p>
-                <p style="color: var(--medium-gray); font-size: 0.95rem;">
-                    ZCMH akan dipublikasikan dalam jurnal ilmiah untuk memvalidasi efektivitas aplikasi dalam membantu kesehatan mental.
-                </p>
-            </div>
+          <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem">
+            ZCMH v1.0.0
+          </h3>
+          <p
+            style="
+              color: var(--medium-gray);
+              margin-bottom: 2rem;
+              line-height: 1.8;
+            "
+          >
+            Android 5.0 (Lollipop) atau lebih tinggi<br />
+            Ukuran: ~15 MB
+          </p>
+
+          <a
+            href="https://github.com/zakycodes/ZCMH/releases/latest/download/zcmh-v1.0.0.apk"
+            class="btn-primary"
+            style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 1rem 2rem;
+              margin-bottom: 1rem;
+            "
+          >
+            <span>📥</span>
+            Download APK (v1.0.0)
+          </a>
+
+          <p
+            style="
+              font-size: 0.9rem;
+              color: var(--medium-gray);
+              margin-top: 1.5rem;
+            "
+          >
+            Atau kunjungi
+            <a
+              href="https://github.com/zakycodes/ZCMH/releases"
+              target="_blank"
+              style="
+                color: var(--soft-blue);
+                font-weight: 600;
+                text-decoration: none;
+              "
+              >GitHub Releases</a
+            >
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>ZCMH</h3>
-                <p>Mental Health Companion berbasis penelitian ilmiah untuk membantu Anda mengelola anxiety, stress, dan kesehatan mental.</p>
-                <p style="margin-top: 1.5rem;">
-                    <strong>Developed by:</strong><br>
-                    Zaky Codes
-                </p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Fitur</h3>
-                <a href="#features">Gratitude Journal</a>
-                <a href="#features">Binaural Beats Music</a>
-                <a href="#features">Meal Reminder</a>
-                <a href="#features">Konsultasi Profesional</a>
-            </div>
-
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <a href="#install">Panduan Instalasi</a>
-                <a href="#faq">FAQ</a>
-                <a href="https://github.com/YOUR_USERNAME/ZCMH" target="_blank">GitHub Repository</a>
-                <a href="https://github.com/YOUR_USERNAME/ZCMH/releases" target="_blank">Releases</a>
-            </div>
-
-            <div class="footer-section">
-                <h3>Kontak & Support</h3>
-                <p>📧 Email: gmadzaky@gmail.com</p>
-                <p>💬 WhatsApp: +62 896-9178-9422</p>
-                
-                <div class="social-links">
-                    <a href="#" class="social-link" title="GitHub">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" title="Instagram">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="https://wa.me/6289691789422" class="social-link" title="WhatsApp">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ZCMH</h3>
+          <p>
+            Mental Health Companion berbasis penelitian ilmiah untuk membantu
+            Anda mengelola anxiety, stress, dan kesehatan mental.
+          </p>
+          <p style="margin-top: 1.5rem">
+            <strong>Developed by:</strong><br />
+            Zaky Codes
+          </p>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2025 ZCMH - Zaky Codes Mental Health. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-                Developed with 💚 by Zaky Codes | Research-Based Mental Health App
-            </p>
+        <div class="footer-section">
+          <h3>Fitur</h3>
+          <a href="#features">Gratitude Journal</a>
+          <a href="#features">Binaural Beats Music</a>
+          <a href="#features">Meal Reminder</a>
+          <a href="#features">Konsultasi Profesional</a>
         </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <a href="#install">Panduan Instalasi</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://github.com/zakycodes/ZCMH" target="_blank"
+            >GitHub Repository</a
+          >
+          <a href="https://github.com/zakycodes/ZCMH/releases" target="_blank"
+            >Releases</a
+          >
+        </div>
+
+        <div class="footer-section">
+          <h3>Kontak & Support</h3>
+          <p>📧 Email: gmadzaky@gmail.com</p>
+          <p>💬 WhatsApp: +62 896-9178-9422</p>
+
+          <div class="social-links">
+            <a
+              href="https://github.com/zakycodes"
+              class="social-link"
+              title="GitHub"
+              target="_blank"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://instagram.com/zakycodes"
+              class="social-link"
+              title="Instagram"
+              target="_blank"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/6289691789422"
+              class="social-link"
+              title="WhatsApp"
+              target="_blank"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 ZCMH - Zaky Codes Mental Health. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem">
+          Developed with 💚 by Zaky Codes | Research-Based Mental Health App
+        </p>
+      </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // FAQ Toggle
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            
-            // Close all FAQs
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Open clicked FAQ if it wasn't active
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
         }
+      });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+      // FAQ Toggle
+      function toggleFaq(element) {
+        const faqItem = element.parentElement;
+        const isActive = faqItem.classList.contains("active");
+
+        // Close all FAQs
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          item.classList.remove("active");
+        });
+
+        // Open clicked FAQ if it wasn't active
+        if (!isActive) {
+          faqItem.classList.add("active");
+        }
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
             });
+          }
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements
+      document
+        .querySelectorAll(".feature-card, .step, .faq-item")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(el);
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      // Screenshot carousel auto-scroll
+      const screenshotTrack = document.querySelector(".screenshot-track");
+      let isScrolling = false;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+      screenshotTrack.addEventListener("mouseenter", () => {
+        isScrolling = false;
+      });
 
-        // Observe elements
-        document.querySelectorAll('.feature-card, .step, .faq-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+      screenshotTrack.addEventListener("mouseleave", () => {
+        isScrolling = true;
+      });
 
-        // Screenshot carousel auto-scroll
-        const screenshotTrack = document.querySelector('.screenshot-track');
-        let isScrolling = false;
-
-        screenshotTrack.addEventListener('mouseenter', () => {
-            isScrolling = false;
-        });
-
-        screenshotTrack.addEventListener('mouseleave', () => {
-            isScrolling = true;
-        });
-
-        // Auto scroll screenshots
-        setInterval(() => {
-            if (isScrolling && screenshotTrack) {
-                screenshotTrack.scrollLeft += 1;
-                if (screenshotTrack.scrollLeft >= screenshotTrack.scrollWidth - screenshotTrack.clientWidth) {
-                    screenshotTrack.scrollLeft = 0;
-                }
-            }
-        }, 30);
+      // Auto scroll screenshots
+      setInterval(() => {
+        if (isScrolling && screenshotTrack) {
+          screenshotTrack.scrollLeft += 1;
+          if (
+            screenshotTrack.scrollLeft >=
+            screenshotTrack.scrollWidth - screenshotTrack.clientWidth
+          ) {
+            screenshotTrack.scrollLeft = 0;
+          }
+        }
+      }, 30);
     </script>
-</body>
+  </body>
 </html>
