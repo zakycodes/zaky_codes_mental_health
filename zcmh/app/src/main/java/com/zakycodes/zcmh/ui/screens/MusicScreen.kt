@@ -1,4 +1,5 @@
 package com.zakycodes.zcmh.ui.screens
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.expandVertically
@@ -6,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -33,6 +35,7 @@ import com.zakycodes.zcmh.data.model.MusicTrack
 import com.zakycodes.zcmh.ui.theme.MintGreen
 import com.zakycodes.zcmh.ui.theme.SoftBlue
 import com.zakycodes.zcmh.ui.viewmodel.MusicViewModel
+
 @Composable
 fun MusicScreen(
     viewModel: MusicViewModel
@@ -521,13 +524,20 @@ fun ModernPlayerCard(
     onSeek: (Int) -> Unit,
     formatTime: (Int) -> String
 ) {
-    ElevatedCard(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.elevatedCardColors(
+    // FIXED: Gunakan Card biasa dengan border, bukan ElevatedCard
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(
+                width = 1.dp,
+                color = if (isPlaying) MintGreen.copy(alpha = 0.3f) else Color(0xFFE2E8F0),
+                shape = RoundedCornerShape(16.dp)
+            ),
+        colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
-        elevation = CardDefaults.elevatedCardElevation(
-            defaultElevation = 2.dp
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp  // FIXED: No elevation, pakai border saja
         ),
         shape = RoundedCornerShape(16.dp)
     ) {
@@ -796,17 +806,23 @@ fun MusicTrackCard(
     pulseAlpha: Float,
     onClick: () -> Unit
 ) {
-    ElevatedCard(
+    // FIXED: Gunakan Card biasa dengan border
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick),
-        colors = CardDefaults.elevatedCardColors(
+            .clickable(onClick = onClick)
+            .border(
+                width = if (isCurrentlyPlaying) 1.5.dp else 0.5.dp,
+                color = if (isCurrentlyPlaying) MintGreen.copy(alpha = 0.4f) else Color(0xFFE2E8F0),
+                shape = RoundedCornerShape(12.dp)
+            ),
+        colors = CardDefaults.cardColors(
             containerColor = if (isCurrentlyPlaying)
                 MintGreen.copy(alpha = 0.08f)
             else Color.White
         ),
-        elevation = CardDefaults.elevatedCardElevation(
-            defaultElevation = if (isCurrentlyPlaying) 2.dp else 1.dp
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp  // FIXED: No elevation
         ),
         shape = RoundedCornerShape(12.dp)
     ) {
